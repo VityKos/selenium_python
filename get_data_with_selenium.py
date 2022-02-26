@@ -1,31 +1,34 @@
 import time
 import os
 
-delay = 1
 
 def download_libraries():
     os.system("pip3 install selenium")
 
 
-def set_delay(t):
-    delay = t
+class HTML_getter:
+    delay = 1
+    path = ""
 
+    def __init__(self, delay=1, path=""):
+        self.delay = delay
+        self.path = path
 
-def get_html_code_by(url):
-    from selenium import webdriver
+    def get_html_code_by(self, url):
+        from selenium import webdriver
 
-    driver = webdriver.Chrome(executable_path="/Users/viktor/PycharmProjects/selenium_python/chromedriver")
+        driver = webdriver.Chrome(executable_path=self.path)
 
-    try:
-        driver.get(url)
-        time.sleep(delay)
-        return driver.page_source
+        try:
+            driver.get(url)
+            time.sleep(self.delay)
+            return driver.page_source
 
-    except Exception as ex:
-        print(ex)
-    finally:
-        driver.close()
-        driver.quit()
+        except Exception as ex:
+            print(ex)
+        finally:
+            driver.close()
+            driver.quit()
 
 
 def main():
